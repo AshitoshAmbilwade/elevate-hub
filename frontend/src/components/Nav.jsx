@@ -1,8 +1,21 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 function Nav() {
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   //toggling mobile menu
+
+  //render mentor signup when click
+  const signUpMentorBtnClick = () => {
+    navigate("/signup/mentor")
+  };
+
+  //render students signup when click
+  const signUpStudentBtnClick=()=>{
+    navigate("/signup/student")
+  }
+
+
 
   return (
     <div className="bg-white ">
@@ -28,7 +41,7 @@ function Nav() {
           {/* desktop navigation (visible only when user is not logged in) */}
           <ul className="items-center hidden space-x-8 lg:flex">
             <li>
-              <button className="cursor-pointer h-12 px-6 font-medium tracking-wide text-gray border-4 border-green-500 bg-green-500 rounded-md hover:bg-green-600 transition-all duration-300 hover:text-white">
+              <button onClick={signUpMentorBtnClick} className="cursor-pointer h-12 px-6 font-medium tracking-wide text-gray border-4 border-green-500 bg-green-500 rounded-md hover:bg-green-600 transition-all duration-300 hover:text-white">
                 Become a Mentor with Us
               </button>
             </li>
@@ -40,7 +53,9 @@ function Nav() {
             </li>
 
             <li>
-              <button className="cursor-pointer inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white bg-green-500 rounded-md hover:bg-green-600 transition-all duration-300">
+              <button
+              onClick={signUpStudentBtnClick}
+              className="cursor-pointer inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white bg-green-500 rounded-md hover:bg-green-600 transition-all duration-300">
                 Sign up
               </button>
             </li>
@@ -49,7 +64,10 @@ function Nav() {
           {/* When isMobileIsOpen is true */}
           {isMobileMenuOpen && (
             <div className="absolute top-16 w-full bg-white shadow-lg p-4 space-y-4 lg:hidden z-10 ">
-              <button className="cursor-pointer block w-full text-center py-2 font-medium tracking-wide text-gray-800 border-4 border-green-500 bg-green-500  rounded-md hover:bg-green-700 transition-all duration-300 hover:text-white">
+              <button
+                className="cursor-pointer block w-full text-center py-2 font-medium tracking-wide text-gray-800 border-4 border-green-500 bg-green-500  rounded-md hover:bg-green-700 transition-all duration-300 hover:text-white"
+                onClick={signUpMentorBtnClick}
+              >
                 Become a Mentor with Us
               </button>
 
@@ -60,7 +78,9 @@ function Nav() {
               </button>
 
               {/* sign up */}
-              <button className="cursor-pointer block w-full text-center py-2 font-medium tracking-wide text-gray-800 border-4 border-green-500 bg-green-500  rounded-md hover:bg-green-700 transition-all duration-300 hover:text-white">
+              <button
+              onClick={signUpStudentBtnClick}
+              className="cursor-pointer block w-full text-center py-2 font-medium tracking-wide text-gray-800 border-4 border-green-500 bg-green-500  rounded-md hover:bg-green-700 transition-all duration-300 hover:text-white">
                 Sign Up
               </button>
             </div>
