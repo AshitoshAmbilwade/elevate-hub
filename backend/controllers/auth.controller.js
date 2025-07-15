@@ -1,22 +1,27 @@
 import userService from '../services/auth.service.js';
 import httpStatus from '../util/httpStatus.js';
-import tokenService from '../services/token.service.js'
-const signUp = async (req, res)=>{
-    const [name, email, password,username, role]= req.body;
-    const user= await userService.createUser({
-        name,email,password,username,role,
-    });
-    user.password=undefined;
-    return res.status(httpStatus.created).json({
-        message:"Account created successfully",
-        user,
-    })
-}
 
-const signIn = async(req,res)=>{
+const signUp = async (req, res) => {
+  const { name, email, password, username, role } = req.body;
 
-}
+  const user = await userService.createUser({
+    name,
+    email,
+    password,
+    username,
+    role,
+  });
 
-export default{
-    signIn,signUp
-}
+  user.password = undefined;
+
+  return res.status(httpStatus.created).json({
+    message: "Account created successfully",
+    user,
+  });
+};
+
+const signIn = async (req, res) => {
+  // to be implemented
+};
+
+export { signUp, signIn };

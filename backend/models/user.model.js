@@ -97,7 +97,7 @@ userSchema.pre("save", async function (next) {
 });
 
 // Index for email field
-userSchema.index({ email: 1 });
+//userSchema.index({ email: 1 });
 
 const UserModel = model("User", userSchema);
 
