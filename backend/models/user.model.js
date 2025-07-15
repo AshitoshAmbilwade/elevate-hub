@@ -1,46 +1,104 @@
 import mongoose, { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
-import { use } from "react";
 
-const userSchema = new Schema({
-  name: { type: String, required: true, trim: true },
 
-  email: {
-    type: String,
-    required: true,
-    trim: true,
-    lowercase: true,
-    unique: true, // ensure no duplicate emails
+const userSchema = new Schema(
+  {
+    photoUrl: {
+      type: Schema.Types.String,
+      default: "",
+    },
+    name: {
+      type: Schema.Types.String,
+      required: true,
+      trim: true,
+    },
+    username: {
+      type: Schema.Types.String,
+      required: true,
+      trim: true,
+      unique: true,
+    },
+    email: {
+      type: Schema.Types.String,
+      unique: true,
+      required: true,
+      trim: true,
+    },
+    password: {
+      type: Schema.Types.String,
+      required: true,
+      select: false,
+    },
+    verified: {
+      type: Schema.Types.Boolean,
+      default: false,
+    },
+    role: {
+      type: Schema.Types.String,
+      enum: ["mentor", "student"],
+      default: null, // Initially null, can be set later
+    },
+    profile: {
+      tags: {
+        type: [Schema.Types.String],
+        default: [],
+      },
+      title: {
+        type: Schema.Types.String,
+        default: "",
+      },
+      bio: {
+        type: Schema.Types.String,
+        default: "",
+      },
+      college: {
+        type: Schema.Types.String,
+        default: "",
+      },
+      social: {
+        linkedin: {
+          type: Schema.Types.String,
+          default: "",
+        },
+        github: {
+          type: Schema.Types.String,
+          default: "",
+        },
+        twitter: {
+          type: Schema.Types.String,
+          default: "",
+        },
+        facebook: {
+          type: Schema.Types.String,
+          default: "",
+        },
+        instagram: {
+          type: Schema.Types.String,
+          default: "",
+        },
+      },
+    },
   },
+  { timestamps: true }
+);
 
-  username: {
-    type: String,
-    required: true,
-    trim: true,
-    unique: true,
-  },
+// Instance method to compare passwords
+userSchema.methods.isPasswordMatch = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
-  password: {
-    type: String,
-    required: true,
-  },
-
-  role: {
-    type: String,
-    enum: ["student", "mentor"],
-    default: "student",
-  },
-});
-
-// Optional: hash password before saving
+// Pre-save hook to hash password
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
+  if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 8);
   }
   next();
 });
 
+// Index for email field
 userSchema.index({ email: 1 });
 
 const UserModel = model("User", userSchema);
+
 export default UserModel;

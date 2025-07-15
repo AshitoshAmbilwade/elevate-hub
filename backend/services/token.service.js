@@ -56,7 +56,7 @@ const verifyToken = async(token, secret)=>{
 }
 
 // ✅ Export functions
-export {
+export default{
   generateAuthToken,
   generateVerificationToken,
   verifyToken

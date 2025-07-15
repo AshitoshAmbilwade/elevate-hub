@@ -18,7 +18,7 @@ const signInValidation = Joi.object({
 });
 
 // You can export like this:
-export default {
+export  {
   signInValidation,
   signUpValidate,
 };

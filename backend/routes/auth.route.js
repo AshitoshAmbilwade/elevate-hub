@@ -1,13 +1,15 @@
 import express from 'express'
-import authController from '../controllers/auth.controller';
-import validate from '../middlewares/validate';
-import asyncHandler from '../helper/asyncHandler'
-import { signInValidation, signUpValidate } from "../validations/auth.validation";
+import authController from '../controllers/auth.controller.js';
+import validate from '../middlewares/validate.js';
+import asyncHandler from '../helper/asyncHandler.js';
+import { signInValidation, signUpValidate } from "../validations/auth.validation.js";
+
 
 const router = express.Router();
 
-router("/signup", validate(signUpValidate), asyncHandler(authController.signup))
+router.post("/signup",validate(signUpValidate ),asyncHandler(authController.signUp));
 
-router("/signin", validate(signInValidation), asyncHandler(authController.signin))
+router.post("/signin",validate(signInValidation),asyncHandler(authController.signIn));
+
 
 export default router;

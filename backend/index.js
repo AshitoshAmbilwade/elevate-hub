@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+import router from "./routes/index.js";
 const app = express()
 const PORT = process.env.PORT || 5000;
 
@@ -20,7 +21,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
 
 //routes
-
+app.use("/api", router);
 
 
 app.get('/', (req, res) => {

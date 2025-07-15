@@ -1,0 +1,9 @@
+import express from "express";
+import authRoutes from "./auth.route.js";
+
+const router = express.Router();
+
+// Register all route modules here
+router.use("/auth", authRoutes); // final path: /api/auth/signup, /api/auth/signin
+
+export default router;
