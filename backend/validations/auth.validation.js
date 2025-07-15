@@ -2,6 +2,8 @@ import Joi from "joi";
 
 // Joi is a library for validation purposes
 
+//and we are building joi schema here
+
 const signUpValidate = Joi.object({
   name: Joi.string().required().trim(),
   username: Joi.string().required().trim(),

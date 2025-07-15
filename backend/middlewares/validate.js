@@ -11,14 +11,20 @@ export const validationSource = {
 };
 
 // Middleware function to apply Joi validation
+//used to validate joi schema
 const validate = (schema, source = validationSource.BODY) => {
   return (req, res, next) => {
-    const { error } = schema.validate(req[source]);
-    if (error) {
-      const message = error.details?.[0]?.message || "Validation Error";
-      return next(new ApiError(httpStatus.BAD_REQUEST, message));
+    try {
+      const { error } = schema.validate(req[source]);
+      if(!error) return next();
+      const {details} = error;
+      const message= details.map((i)=>i.message.replace(/['"]+/g,"")).join(",");
+      console.log(message);
+      next (new ApiError(httpStatus.badRequest, message))
+      
+    } catch (error) {
+      next(error)
     }
-    next();
   };
 };
 

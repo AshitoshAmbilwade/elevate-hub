@@ -6,4 +6,8 @@ import { signInValidation, signUpValidate } from "../validations/auth.validation
 
 const router = express.Router();
 
-router("/signup", validate(signUpValidate))
+router("/signup", validate(signUpValidate), asyncHandler(authController.signup))
+
+router("/signin", validate(signInValidation), asyncHandler(authController.signin))
+
+export default router;
