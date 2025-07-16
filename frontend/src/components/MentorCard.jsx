@@ -5,7 +5,8 @@ const MentorCard = ({ mentor }) => {
     <>
       <div>
         <div>
-          <h4>{mentor?.profile?.title}</h4>
+          {/* <h4>{mentor?.profile?.title}</h4> */}
+          <h4>{mentor?.username}</h4>
         </div>
       </div>
     </>

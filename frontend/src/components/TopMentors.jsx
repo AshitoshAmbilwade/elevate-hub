@@ -13,7 +13,7 @@ const TopMentors = () => {
     const topselectedMentors = [];
     const totalMentors = mentors.length;
 
-    while (topselectedMentors < 4 && topselectedMentors.length < totalMentors) {
+    while (topselectedMentors.length < 4 && topselectedMentors.length < totalMentors) {
       const randomIndex = Math.floor(Math.random() * totalMentors);
       const randomMentor = mentors[randomIndex];
       if (!topselectedMentors.includes(randomMentor)) {
@@ -45,8 +45,9 @@ const TopMentors = () => {
         <h1>Top Mentors</h1>
         <div>
           {topMentors.map((mentor) => {
-            /* return <MentorCard mentor={mentor} key={mentor?._id} />; */
-            return <li>{mentor.name}</li>
+             return <MentorCard mentor={mentor} key={mentor?._id} />; 
+            /* return <p key={mentor._id} >{mentor.name}</p> */
+
           })}
         </div>
       </div>
