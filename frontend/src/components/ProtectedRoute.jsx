@@ -1,10 +1,18 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React from 'react'
+import { Navigate, useLocation } from 'react-router-dom';
+import useUserStore from '../store/user';
 
-const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem("token");
+const ProtectedRoute = (props) => {
+    const {children}= props;
+    const {user}=useUserStore();
+    const location=useLocation();
+    if(!user){
+        return <Navigate to={`/signin?redirect=${location.pathname}`}/>
+    }
+    
+  return (
+    <div>{children}</div>
+  )
+}
 
-  return isAuthenticated ? children : <Navigate to="/signin" replace />;
-};
-
-export default ProtectedRoute;
+export default ProtectedRoute
