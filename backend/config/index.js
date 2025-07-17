@@ -1,17 +1,12 @@
-import dotenv from "dotenv";
-dotenv.config();
+import detenv from "dotenv";
 
 const config = {
   jwt: {
-    accessSecret: process.env.JWT_ACCESS_SECRET || "random-secret-key",
-    accessExpirationMinutes: parseInt(process.env.JWT_ACCESS_EXPIRATION_MINUTES) || 30,
-    verificationSecret: process.env.JWT_VERIFICATION_SECRET || "asfsdgdaasd-dje",
-    verificationExpirationMinutes: parseInt(process.env.JWT_VERIFICATION_EXP_MINUTES) || 5,
+    accessSecret: process.env.JWT_ACCESS_SECRET ||"asdfghgfdsadfghgfds",
+    refreshSecret: process.env.JWT_REFRESH_SECRET ||"refresh_token_secret_key",
+    accessExpirationMinutes: process.env.JWT_ACCESS_EXPIRATION_MINUTES|| 10,
+    refreshExpirationDays: process.env.JWT_REFRESH_EXPIRATION_DAYS|| 10,
   },
-
-  // in future you can add:
-  // db: { ... }
-  // mail: { ... }
 };
 
 export default config;

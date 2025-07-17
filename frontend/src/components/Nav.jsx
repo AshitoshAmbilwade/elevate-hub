@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import useUserStore from "../store/user";
 function Nav() {
+  const {user, setUser}= useUserStore();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   //toggling mobile menu
@@ -15,6 +17,9 @@ function Nav() {
     navigate("/signup/student")
   }
 
+  const signInBtnClick=()=>{
+    navigate("/signin")
+  }
 
 
   return (
@@ -47,7 +52,7 @@ function Nav() {
             </li>
 
             <li>
-              <button className="cursor-pointer font-medium tracking-wide text-green-500 hover:text-green-700 transition-all duration-300">
+              <button onClick={signInBtnClick} className="cursor-pointer font-medium tracking-wide text-green-500 hover:text-green-700 transition-all duration-300" >
                 Sign in
               </button>
             </li>
@@ -73,7 +78,7 @@ function Nav() {
 
               {/* sign in */}
 
-              <button className="cursor-pointer block w-full text-center py-2 font-medium tracking-wide text-green-500 hover:text-green-700 transition-all duration-300">
+              <button onClick={signInBtnClick} className="cursor-pointer block w-full text-center py-2 font-medium tracking-wide text-green-500 hover:text-green-700 transition-all duration-300">
                 Sign in
               </button>
 
