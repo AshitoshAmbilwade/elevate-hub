@@ -1,14 +1,12 @@
-import { TOKEN } from "../const";
+import { TOKEN } from "../const"
 
-const setToken =()=>{
-    return sessionStorage.setItem(TOKEN)
-}
-
-const getToken =()=>{
+const getToken=()=>{
     return sessionStorage.getItem(TOKEN);
 };
 
-const removeToken =()=>sessionStorage.removeItem(TOKEN);
+const setToken=(data)=>{
+    return sessionStorage.setItem(TOKEN,data);
+};
+const removeToken=()=>sessionStorage.removeItem(TOKEN);
 
-
-export {setToken, getToken, removeToken}
+export {getToken,setToken,removeToken}
