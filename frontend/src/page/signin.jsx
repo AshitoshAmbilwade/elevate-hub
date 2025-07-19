@@ -25,7 +25,7 @@ const Signin = () => {
       const response=await auth.signin(data);
       reset();
       setUser(response.data.user);
-      //setToken(response.data.token);
+      setToken(response.data.token);
       navigate("/");
       toast.success("Login successfully!")
     }
