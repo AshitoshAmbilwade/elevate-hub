@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { getUserById } from "../services/user.service.js";
 import ApiError from '../helper/apiError.js';
 import httpStatus from '../util/httpStatus.js';
+import config from '../config/index.js';
 
 /* const protect = async (req, res, next) => {
   let token;
@@ -69,8 +70,8 @@ const protect = async (req, res, next) => {
   if (!token) return next(new ApiError(401, "Login required"));
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
-    const user = await getUserById(decoded.id);
+    const decoded = jwt.verify(token, config.jwt.accessSecret);
+    const user = await getUserById(decoded._id); // changed from decoded.id to decoded._id
     if (!user) return next(new ApiError(401, "User not found"));
     req.user = user;
     next();
