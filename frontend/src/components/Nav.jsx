@@ -6,35 +6,17 @@ import { removeToken, getToken } from "../helper";
 import { USER_STORE_PERSIST } from "../const";
 
 const Nav = () => {
-  const { user, setUser } = useUserStore();
-  const navigate = useNavigate();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const signUpStudentBtnClick = () => navigate("/signup/student");
-  const signUpMentorBtnClick = () => navigate("/signup/mentor");
-  const signInBtnClick = () => navigate("/signin");
-
-  const onLogoutButtonClick = () => {
-    removeToken();
-    setUser(null);
-    navigate("/");
-  };
-
-  useEffect(() => {
-    const token = getToken();
-    const storedData = localStorage.getItem(USER_STORE_PERSIST);
-    if (token && !user && storedData) {
-      try {
-        const parsed = JSON.parse(storedData);
-        if (parsed?.state?.user) {
-          setUser(parsed.state.user);
-        }
-      } catch (error) {
-        console.error("Failed to parse stored user data:", error);
-      }
+      const {user,setUser}=useUserStore();
+    const navigate=useNavigate();
+    const signUpStudentBtnClick=()=>navigate("/signup/student")
+    const signUpMentorBtnClick=()=>navigate("/signup/mentor");
+    const signInBtnClick=()=>navigate("/signin")
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const onLogoutButtonClick=()=>{
+        removeToken();
+        setUser(null);
+        navigate("/");
     }
-  }, [user, setUser]);
-
   const menu = {
     items: [
       {
