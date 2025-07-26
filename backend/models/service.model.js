@@ -1,4 +1,3 @@
-import Joi from 'joi';
 import mongoose,{Schema, model} from "mongoose";
 
 const serviceSchema=new Schema(
@@ -8,7 +7,7 @@ const serviceSchema=new Schema(
             ref:"User",
             required:true
         },
-        serviceName:{
+        name:{
             type:Schema.Types.String,
             required:true,
             trim:true

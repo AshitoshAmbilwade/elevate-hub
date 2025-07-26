@@ -3,6 +3,7 @@ import authRoutes from "./auth.route.js";
 import homeRoutes from "./home.route.js";
 import mentorRoutes from "./mentor.route.js";
 import userRoutes from "./user.route.js";
+import serviceRoute from './service.route.js'
 
 const router = express.Router();
 
@@ -28,6 +29,10 @@ const Routes = [
   {
     path: "/user", // ✅ Register the /user route
     route: userRoutes,
+  },
+  {
+    path: "/service",
+    route: serviceRoute,
   },
 ];
 

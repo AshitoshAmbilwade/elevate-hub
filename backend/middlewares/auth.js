@@ -62,22 +62,28 @@ const restrictTo = (...roles) => {
 }; */
 
 // middlewares/auth.js
-const protect = async (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
-  console.log(token);
-  
-  if (!token) return next(new ApiError(401, "Login required"));
 
+
+const protect = async (req, res, next) => {
   try {
-    const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
-    const user = await getUserById(decoded._id); // changed from decoded.id to decoded._id
-    if (!user) return next(new ApiError(401, "User not found"));
-    req.user = user;
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET); // Ensure this secret matches the one used in login
+
+    req.user = decoded;
     next();
-  } catch (err) {
-    return next(new ApiError(401, "Invalid token"));
+  } catch (error) {
+    console.error("JWT Error:", error.message);
+    res.status(401).json({ message: "Invalid token" });
   }
 };
+
 
 
 const restrictTo = (...roles) => {
